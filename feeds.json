@@ -1,0 +1,13 @@
+{
+  "feeds": [
+    {"name": "Nile Post", "region": "Uganda", "url": "https://nilepost.co.ug/feed"},
+    {"name": "Daily Monitor", "region": "Uganda", "url": "https://www.monitor.co.ug/uganda/rss"},
+    {"name": "BBC Africa", "region": "Africa", "url": "https://feeds.bbci.co.uk/news/world/africa/rss.xml"},
+    {"name": "Al Jazeera", "region": "World", "url": "https://www.aljazeera.com/xml/rss/all.xml"},
+    {"name": "BBC World", "region": "World", "url": "https://feeds.bbci.co.uk/news/world/rss.xml"}
+  ],
+  "youtube": [
+    {"name": "Al Jazeera English", "channelId": "UCNye-wNBqNL5ZzHSJj3l8Bg"},
+    {"name": "BBC News", "channelId": "UC16niRr50-MSBwiO3YDb3RA"}
+  ]
+}
