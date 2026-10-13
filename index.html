@@ -4,42 +4,91 @@
 :root{--acc:#f07800;--yel:#ffb81c;--bg:#fff8ea;--card:#fff;--ink:#141108;--mut:#6b5f45}
 @media(prefers-color-scheme:dark){:root{--bg:#0e0c08;--card:#1a1610;--ink:#f6efe0;--mut:#b8a888}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,sans-serif}
-header{background:#111;border-bottom:4px solid var(--acc);text-align:center;padding:12px}
+.top{background:#000;color:#ddd;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 12px;font-size:.75rem}
+.top input{width:160px;max-width:50%;padding:5px 10px;border-radius:99px;background:#222;color:#fff;border:1px solid #444;font:inherit}
+header{background:#111;border-bottom:4px solid var(--acc);text-align:center;padding:10px}
 h1{margin:0;color:#fff;text-transform:uppercase;letter-spacing:.04em}h1 b{color:var(--yel)}
-nav{background:var(--acc);display:flex;gap:6px;overflow-x:auto;padding:6px 12px}
-nav button{border:0;background:none;font:inherit;font-weight:700;padding:3px 12px;border-radius:99px;cursor:pointer;color:#111}
-nav button.on{background:#111;color:var(--yel)}
-main{max-width:1000px;margin:auto;padding:12px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 12px;padding-right:80px}
+.chips.reg{background:var(--acc)}.chips.cat{background:#111}
+.chips button{border:0;background:none;font:inherit;font-weight:700;padding:3px 12px;border-radius:99px;cursor:pointer;white-space:nowrap}
+.reg button{color:#111}.reg button.on{background:#111;color:var(--yel)}
+.cat button{color:#ffd978}.cat button.on{background:var(--yel);color:#111}
+.tick{background:#000;display:flex;align-items:center;overflow:hidden;color:#fff;font-size:.82rem}
+.tick b{background:var(--yel);color:#111;padding:5px 10px;white-space:nowrap}
+.tick div{white-space:nowrap;animation:mq 60s linear infinite;padding-left:12px}@keyframes mq{to{transform:translateX(-50%)}}
+main{max-width:1000px;margin:auto;padding:12px 74px 40px 12px}
 h2{border-left:5px solid var(--acc);padding-left:8px;text-transform:uppercase;font-size:1rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid rgba(120,120,120,.25)}
-.card img{width:100%;height:160px;object-fit:cover;display:block;background:linear-gradient(135deg,var(--acc),#111)}
-.card div{padding:10px}.card h3{margin:.2rem 0;font-size:1rem}.meta{color:var(--mut);font-size:.8rem}
-a{color:inherit;text-decoration:none}.read{color:var(--acc);font-weight:700;font-size:.85rem}
-.vid{position:relative;aspect-ratio:16/9;background:#000;cursor:pointer}.vid img{height:100%}.vid iframe{width:100%;height:100%;border:0}
-.vid span{position:absolute;inset:0;display:grid;place-items:center;font-size:3rem;color:#fff}
-footer{text-align:center;color:var(--mut);font-size:.8rem;padding:20px}
+.card img{width:100%;height:150px;object-fit:cover;display:block;background:linear-gradient(135deg,var(--acc),#111)}
+.card .b{padding:10px}.card h3{margin:.2rem 0;font-size:1rem}.meta{color:var(--mut);font-size:.8rem}
+a{color:inherit;text-decoration:none}
+.tag{background:var(--acc);color:#111;font-size:.65rem;font-weight:800;padding:1px 6px;border-radius:3px;text-transform:uppercase}
+.acts{display:flex;gap:6px;margin-top:8px}.acts button,.pri{background:rgba(120,120,120,.22);border:0;color:inherit;border-radius:99px;padding:5px 12px;font:inherit;cursor:pointer}
+.pri{background:var(--acc);color:#111;font-weight:700;display:inline-block;margin:4px}
+.pick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px}.pick button{border:1px solid var(--acc);background:none;color:var(--ink);border-radius:99px;padding:5px 12px;font:inherit;cursor:pointer}.pick button.on{background:var(--acc);color:#111;font-weight:700}
+.vid{position:relative;aspect-ratio:16/9;background:#000;cursor:pointer}.vid img{height:100%}.vid iframe{width:100%;height:100%;border:0}.vid span{position:absolute;inset:0;display:grid;place-items:center;font-size:3rem;color:#fff}
+.rail{position:fixed;right:4px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;z-index:20;background:rgba(0,0,0,.85);padding:8px 5px;border-radius:30px;max-height:96%;overflow:auto}
+.rail button,.rail a{border:0;background:none;color:#fff;font:inherit;font-size:.62rem;width:54px;padding:6px 0;border-radius:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.rail i{font-style:normal;font-size:1.4rem;line-height:1.2}.rail .on{background:var(--yel);color:#111;font-weight:700}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--bg);width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:16px}
+.empty{text-align:center;color:var(--mut);padding:30px 0}footer{text-align:center;color:var(--mut);font-size:.8rem;padding:20px}
 </style></head><body>
-<header><h1>Daily <b>Grind</b> Live</h1><div class="meta" id="upd" style="color:#ffb81c"></div></header>
-<nav id="nav"></nav><main id="app"></main>
+<div class="top"><span id="upd"></span><input id="q" placeholder="🔍 Search news…"></div>
+<header><h1>Daily <b>Grind</b> Live</h1></header>
+<div class="chips reg" id="reg"></div><div class="chips cat" id="cat"></div>
+<div class="tick"><b>● LATEST</b><div id="tk"></div></div>
+<main id="app"></main><nav class="rail" id="rail"></nav>
 <footer>Headlines, pictures and videos belong to their sources. Tap a story to read it on the original site.</footer>
 <script>
-let D={stories:[],videos:[]},region="";
-const R=["","Uganda","Africa","World"],$=s=>document.querySelector(s);
+const APP="https://claude.ai/artifact/AcKm2M4tMn14sc4ToVehRX";
+const CATS=["Politics","Sports","Education","Health","Business","Tech","Entertainment","World","General"],REG=["","Uganda","Africa","World"];
+const RX={Sports:/\b(football|soccer|cricket|athlet\w*|marathon|olympic\w*|league|cup|fifa|caf|rugby|tennis|boxing|coach|medal|champion\w*|tournament|golf|f1)\b/i,
+Entertainment:/\b(music|film|movie|singer|concert|celebrity|award|actor|actress|album|netflix|festival|artist|comedian|bbnaija|showbiz)\b/i,
+Health:/\b(health|hospital|ebola|covid|vaccine\w*|disease|malaria|doctor\w*|outbreak|cancer|medical|virus|nurse\w*|surgery|mpox)\b/i,
+Education:/\b(school\w*|student\w*|universit\w*|exam\w*|uneb|teacher\w*|education|pupil\w*|scholarship\w*|curriculum|makerere|kyambogo|college|graduat\w*)\b/i,
+Tech:/\b(ai|artificial intelligence|tech\w*|google|apple|microsoft|cyber\w*|internet|smartphone\w*|software|robot\w*|meta|openai|app|digital)\b/i,
+Business:/\b(econom\w*|business\w*|bank\w*|prices?|oil|fuel|diesel|trade|market\w*|shilling|dollar|inflation|tax\w*|compan\w*|stocks?|invest\w*|tariff\w*|profit\w*)\b/i,
+Politics:/\b(president|minister\w*|parliament\w*|election\w*|government|opposition|vote\w*|senat\w*|protest\w*|sanction\w*|cabinet|diplomat\w*|treaty|ceasefire|mp|mps|campaign\w*|police|court)\b/i};
+const ORDER=["Sports","Entertainment","Health","Education","Tech","Business","Politics"];
+const catOf=s=>{const t=s.title+" "+s.summary;for(const k of ORDER)if(RX[k].test(t))return k;return s.region==="Uganda"?"General":"World"};
+const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let D={stories:[],videos:[]},tab="news",region="",cat="",q="",prefs=ls.get("prefs",[]),saved=ls.get("saved",[]);
+const $=s=>document.querySelector(s);
 const ago=t=>{const m=Math.round((Date.now()-t)/6e4);return m<60?m+" min ago":m<1440?Math.round(m/60)+" h ago":Math.round(m/1440)+" d ago"};
-function el(t,a,...k){const e=document.createElement(t);for(const x in a||{})x==="class"?e.className=a[x]:x.startsWith("on")?e[x]=a[x]:e.setAttribute(x,a[x]);k.flat().forEach(c=>c!=null&&e.append(c));return e}
+function el(t,a,...k){const e=document.createElement(t);for(const x in a||{})x==="class"?e.className=a[x]:x.startsWith("on")?e[x]=a[x]:e.setAttribute(x,a[x]);k.flat().forEach(c=>c!=null&&c!==false&&e.append(c));return e}
+function toast(m){const d=el("div",{style:"position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#111;color:#ffb81c;padding:8px 14px;border-radius:99px;z-index:99"},m);document.body.append(d);setTimeout(()=>d.remove(),2400)}
+function copy(t){const fb=()=>{const i=el("textarea",{style:"position:fixed;opacity:0"},t);document.body.append(i);i.select();try{document.execCommand("copy");toast("Copied!")}catch(e){toast("Could not copy")}i.remove()};try{navigator.clipboard.writeText(t).then(()=>toast("Copied!"),fb)}catch(e){fb()}}
+function share(s){const t=s.title+" — Daily Grind",txt=t+"\n"+s.link,e=encodeURIComponent;
+ const a=(l,u)=>el("a",{class:"pri",href:u,target:"_blank",rel:"noopener"},l),b=(l,f)=>el("button",{class:"pri",onclick:f},l);
+ const m=el("div",{class:"ov",onclick:ev=>{if(ev.target===m)m.remove()}},el("div",{class:"sheet"},el("h2",{style:"margin-top:0"},"Share"),el("div",{class:"meta"},s.title),
+  navigator.share?b("📲 Share…",()=>navigator.share({title:t,text:t,url:s.link}).catch(()=>{})):null,
+  a("WhatsApp","https://wa.me/?text="+e(txt)),a("Facebook","https://www.facebook.com/sharer/sharer.php?u="+e(s.link)),a("Snapchat","https://www.snapchat.com/scan?attachmentUrl="+e(s.link)),
+  b("Instagram",()=>{copy(txt);window.open("https://www.instagram.com/","_blank")}),b("Discord",()=>{copy(txt);window.open("https://discord.com/channels/@me","_blank")}),b("Copy link",()=>copy(txt)),
+  el("div",{class:"meta",style:"margin-top:8px"},"Instagram and Discord have no web share link, so the text is copied for you to paste.")));document.body.append(m)}
+function card(s){const on=saved.includes(s.link);
+ return el("div",{class:"card"},el("a",{href:s.link,target:"_blank",rel:"noopener"},s.image?el("img",{src:s.image,alt:"",loading:"lazy",referrerpolicy:"no-referrer",onerror:function(){this.removeAttribute("src")}}):el("img",{alt:""})),
+  el("div",{class:"b"},el("div",{class:"meta"},el("span",{class:"tag"},s.cat)," "+s.source+" · "+ago(s.ts)),el("a",{href:s.link,target:"_blank",rel:"noopener"},el("h3",{},s.title)),el("div",{class:"meta"},s.summary),
+  el("div",{class:"acts"},el("button",{onclick:()=>{saved=on?saved.filter(x=>x!==s.link):[...saved,s.link];ls.set("saved",saved);render()}},on?"❤️ Saved":"🤍 Save"),el("button",{onclick:()=>share(s)},"↗ Share"))))}
+function list(S,msg){return S.length?el("div",{class:"grid"},S.map(card)):el("div",{class:"empty"},msg||"Nothing here yet.")}
 function render(){
- $("#nav").replaceChildren(...R.map(r=>el("button",{class:r===region?"on":"",onclick:()=>{region=r;render()}},r||"All")));
  $("#upd").textContent=D.updated?"Updated "+ago(D.updated):"";
- const S=D.stories.filter(s=>!region||s.region===region),w=el("div");
- w.append(el("h2",{},"Latest news"),el("div",{class:"grid"},S.map(s=>el("a",{class:"card",href:s.link,target:"_blank",rel:"noopener"},
-  s.image?el("img",{src:s.image,alt:"",loading:"lazy",referrerpolicy:"no-referrer",onerror:function(){this.removeAttribute("src")}}):el("img",{alt:""}),
-  el("div",{},el("div",{class:"meta"},s.source+" · "+s.region+" · "+ago(s.ts)),el("h3",{},s.title),el("div",{class:"meta"},s.summary),el("span",{class:"read"},"Read at "+s.source+" →"))))));
- if(D.videos.length)w.append(el("h2",{},"Videos"),el("div",{class:"grid"},D.videos.map(v=>{
-  const b=el("div",{class:"vid",onclick:()=>b.replaceChildren(el("iframe",{src:"https://www.youtube-nocookie.com/embed/"+v.id+"?autoplay=1",allow:"autoplay; encrypted-media; picture-in-picture",allowfullscreen:""}))},
-   el("img",{src:"https://i.ytimg.com/vi/"+v.id+"/hqdefault.jpg",alt:"",loading:"lazy"}),el("span",{},"▶"));
-  return el("div",{class:"card"},b,el("div",{},el("div",{class:"meta"},v.source+" · "+ago(v.ts)),el("h3",{},v.title)))})));
- $("#app").replaceChildren(w)}
+ const all=D.stories.map(s=>({...s,cat:catOf(s)})),ql=q.toLowerCase();
+ let S=all.filter(s=>(!region||s.region===region)&&(!ql||(s.title+" "+s.summary).toLowerCase().includes(ql)));
+ $("#reg").replaceChildren(...REG.map(r=>el("button",{class:r===region?"on":"",onclick:()=>{region=r;render()}},r||"All regions")));
+ $("#cat").replaceChildren(...["",...CATS].map(c=>el("button",{class:c===cat?"on":"",onclick:()=>{cat=c;render()}},c||"All kinds")));
+ $("#tk").textContent=(all.slice(0,10).map(s=>s.title).join("   ◆   ")||"Loading latest news…")+"   ◆   "+(all.slice(0,10).map(s=>s.title).join("   ◆   "));
+ const w=el("div");
+ if(tab==="news"){if(cat)S=S.filter(s=>s.cat===cat);w.append(el("h2",{},"Latest news"),list(S))}
+ if(tab==="foryou"){w.append(el("h2",{},"⭐ For you"),el("div",{class:"meta"},"Tap the kinds of news you like. Saved on this device."),
+  el("div",{class:"pick"},CATS.map(c=>el("button",{class:prefs.includes(c)?"on":"",onclick:()=>{prefs=prefs.includes(c)?prefs.filter(x=>x!==c):[...prefs,c];ls.set("prefs",prefs);render()}},(prefs.includes(c)?"✓ ":"+ ")+c))));
+  w.append(prefs.length?list(S.filter(s=>prefs.includes(s.cat)),"No stories in your kinds right now."):el("div",{class:"empty"},"Pick a few kinds above to build your wire."))}
+ if(tab==="saved")w.append(el("h2",{},"🔖 Saved"),list(all.filter(s=>saved.includes(s.link)),"Tap 🤍 Save on a story to keep it here."));
+ if(tab==="videos")w.append(el("h2",{},"🎬 Videos"),D.videos.length?el("div",{class:"grid"},D.videos.map(v=>{const b=el("div",{class:"vid",onclick:()=>b.replaceChildren(el("iframe",{src:"https://www.youtube-nocookie.com/embed/"+v.id+"?autoplay=1",allow:"autoplay; encrypted-media; picture-in-picture",allowfullscreen:""}))},el("img",{src:"https://i.ytimg.com/vi/"+v.id+"/hqdefault.jpg",alt:"",loading:"lazy"}),el("span",{},"▶"));return el("div",{class:"card"},b,el("div",{class:"b"},el("div",{class:"meta"},v.source+" · "+ago(v.ts)),el("h3",{},v.title)))})):el("div",{class:"empty"},"No videos yet."));
+ $("#app").replaceChildren(w);
+ const T=[["news","🏠","News"],["foryou","⭐","For you"],["videos","🎬","Videos"],["saved","🔖","Saved"]];
+ $("#rail").replaceChildren(...T.map(([k,i,l])=>el("button",{class:tab===k?"on":"",onclick:()=>{tab=k;render()}},el("i",{},i),l)),el("a",{href:APP,target:"_blank",rel:"noopener"},el("i",{},"💬"),"Chat"))}
 async function load(){try{D=await (await fetch("news.json?"+Date.now())).json()}catch(e){}render()}
-load();setInterval(load,600000);
+$("#q").oninput=e=>{q=e.target.value;render()};load();setInterval(load,600000);
 </script></body></html>
